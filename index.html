@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Apify Search Widgets</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="search-panel" aria-label="Search controls">
+        <div class="brand-row">
+          <div>
+            <p class="eyebrow">Real-time Actor search</p>
+            <h1>Apify Search Widgets</h1>
+          </div>
+          <span class="live-pill" id="connectionState">Idle</span>
+        </div>
+
+        <form id="searchForm" class="search-form">
+          <label class="field wide-field">
+            <span>Search query</span>
+            <input id="queryInput" name="query" type="search" placeholder="AI news, best laptops, market trends..." autocomplete="off" required />
+          </label>
+
+          <label class="field">
+            <span>Apify token</span>
+            <input id="tokenInput" name="token" type="password" placeholder="Paste token locally" autocomplete="off" />
+          </label>
+
+          <label class="field">
+            <span>Actor</span>
+            <input id="actorInput" name="actor" type="text" value="apify~google-search-scraper" />
+          </label>
+
+          <label class="field">
+            <span>Results</span>
+            <input id="limitInput" name="limit" type="number" min="1" max="25" value="10" />
+          </label>
+
+          <button class="search-button" type="submit" aria-label="Run search">
+            <span>Search</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m21 21-4.3-4.3m1.3-5.2a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z" />
+            </svg>
+          </button>
+        </form>
+      </section>
+
+      <section class="widget-grid" aria-label="Live widgets">
+        <article class="widget">
+          <span class="widget-label">Run status</span>
+          <strong id="statusValue">Ready</strong>
+        </article>
+        <article class="widget">
+          <span class="widget-label">Results found</span>
+          <strong id="countValue">0</strong>
+        </article>
+        <article class="widget">
+          <span class="widget-label">Elapsed</span>
+          <strong id="elapsedValue">0.0s</strong>
+        </article>
+        <article class="widget">
+          <span class="widget-label">Updated</span>
+          <strong id="updatedValue">Never</strong>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <aside class="activity-panel" aria-label="Activity stream">
+          <div class="section-heading">
+            <h2>Activity</h2>
+            <button id="clearButton" type="button">Clear</button>
+          </div>
+          <ol id="activityList" class="activity-list"></ol>
+        </aside>
+
+        <section class="results-panel" aria-label="Search results">
+          <div class="section-heading">
+            <h2>Results</h2>
+            <span id="sourceValue">No dataset yet</span>
+          </div>
+          <div id="emptyState" class="empty-state">
+            <h3>Start with a query</h3>
+            <p>Run an Apify Actor and the widgets will update as the search completes.</p>
+          </div>
+          <div id="resultsList" class="results-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <template id="resultTemplate">
+      <article class="result-card">
+        <a class="result-title" target="_blank" rel="noreferrer"></a>
+        <p class="result-url"></p>
+        <p class="result-copy"></p>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
